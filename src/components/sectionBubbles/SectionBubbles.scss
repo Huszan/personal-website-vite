@@ -3,53 +3,66 @@ $selector-thickness: 3px;
 $selector-color: white;
 $selector-icon-size: 12px;
 $selector-separator-size: 2rem;
+$progress-pointer-size: 7px;
 
 
-ul {
+.section-bubbles {
     all: unset;
     list-style: none;
 
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: $selector-separator-size;
-}
 
-.section-selector {
-    display: block;
-    position: relative;
-    height: $selector-size;
-    aspect-ratio: 1/1;
-    border: $selector-thickness $selector-color solid;
-    border-radius: 100%;
-    box-sizing: border-box;
-    cursor: pointer;
-
-    transition: background-color ease-out .1s;
-
-    .ico {
+    .progress-pointer-box {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translateX(-50%) translateY(-50%);
-        height: $selector-icon-size;
+        box-sizing: border-box;
+        pointer-events: none;
+
+        .progress-pointer {
+            position: absolute;
+            width: $progress-pointer-size;
+            height: $progress-pointer-size;
+            background-color: white;
+            border-radius: 100%;
+    
+            filter: drop-shadow(white 0 0 calc($progress-pointer-size / 5));
+        }
     }
 
-    &:hover {
-        background-color: rgba($selector-color, .3);
-        filter: drop-shadow(white 0 0 8px)
+    .section-selector {
+        display: block;
+        position: relative;
+        height: $selector-size;
+        aspect-ratio: 1/1;
+        border: $selector-thickness $selector-color solid;
+        border-radius: 100%;
+        box-sizing: border-box;
+    
+        transition: background-color ease-out .1s;
+    
+        .ico {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            height: $selector-icon-size;
+        }
     }
-}
-
-.selected .section-selector {
-    background-color: white;
-
-    .ico {
-        color: black;
+    
+    .selected .section-selector {
+        background-color: white;
+        filter: drop-shadow(white 0 0 8px);
+    
+        .ico {
+            color: black;
+        }
     }
 }
 
 .md {
-    ul {
+    .section-bubbles {
         :not(:last-child) {
             .section-selector::after {
                 content: '';
@@ -62,11 +75,36 @@ ul {
                 background-color: $selector-color;
             }
         }
+
+        .progress-pointer-box {
+            top: 15px;
+            height: calc(100% - 30px);
+            width: 100%;
+    
+            .progress-pointer {
+                left: 50%;
+                transform: translateY(-50%) translateX(-50%);
+                top: var(--progress);
+            }
+        }
+
+        li {
+            &:not(.selected) {
+                cursor: pointer;
+
+                .section-selector {
+                    &:hover {
+                        background-color: rgba($selector-color, .3);
+                        filter: drop-shadow(white 0 0 8px)
+                    }
+                }
+            }
+        }
     }
 }
 
 .sd {
-    ul {
+    .section-bubbles {
         flex-direction: row;
 
         li {
@@ -83,6 +121,18 @@ ul {
                 width: $selector-separator-size;
                 height: $selector-thickness;
                 background-color: $selector-color;
+            }
+        }
+
+        .progress-pointer-box {
+            left: 15px;
+            width: calc(100% - 30px);
+            height: 100%;
+    
+            .progress-pointer {
+                top: 50%;
+                transform: translateY(-50%) translateX(-50%);
+                left: var(--progress);
             }
         }
     }

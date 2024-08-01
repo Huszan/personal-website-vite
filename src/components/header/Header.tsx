@@ -1,30 +1,17 @@
 import './Header.scss';
-import { SectionBubbleNode, SectionBubbles } from '../sectionBubbles/SectionBubbles';
-import { faProjectDiagram, faUniversity, faUser } from '@fortawesome/free-solid-svg-icons';
+import { SectionBubbles } from '../sectionBubbles/SectionBubbles';
+import { SectionsHookData } from '../../hooks/UseSections';
 
-export function Header() {
+export interface HeaderProps {
+    sectionsHook: SectionsHookData,
+}
 
-    const nodes: SectionBubbleNode[] = [
-        {
-            name: 'About me',
-            ico: faUser,
-            cb: () => {},
-        },
-        {
-            name: 'Education',
-            ico: faUniversity,
-            cb: () => {},
-        },
-        {
-            name: 'Projects',
-            ico: faProjectDiagram,
-            cb: () => {},
-        },
-    ]
-    
+export function Header(props: HeaderProps) {
+    const { sectionsHook } = props;
+
     return (
         <header>
-            <SectionBubbles nodes={nodes} indexSelected={0} />
+            <SectionBubbles sectionsHook={sectionsHook} />
         </header>
     )
 }

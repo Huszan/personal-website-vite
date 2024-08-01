@@ -1,42 +1,44 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './SectionBubbles.scss';
-import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { SectionsHookData } from '../../hooks/UseSections';
+import { scrollToElement } from '../../utils/BaseUtils';
+import { CSSProperties } from 'react';
 
 export interface SectionBubblesProps {
-    nodes: SectionBubbleNode[],
-    indexSelected?: number | undefined,
-}
-
-export interface SectionBubbleNode {
-    name: string,
-    ico: IconDefinition,
-    cb: () => void,
+    sectionsHook: SectionsHookData,
 }
 
 export function SectionBubbles(props: SectionBubblesProps) {
-    const [selected, setSelected] = useState<number | undefined>(props.indexSelected);
+    const { sectionsHook } = props;
 
-    if (!props.nodes) return;
+    if (!sectionsHook.get) return;
 
-    const nodeElements = props.nodes.map((node, i) => {
-        const isSelected = selected === i;
-        const callback = () => {
-            setSelected(i);
-            node.cb();
+    const nodeElements = Object.entries(sectionsHook.get).map(([key, section]) => {
+        const isActive = sectionsHook.activeSectionI === key;
+        
+        const selectElement = () => {
+            sectionsHook.setActiveSectionI(key);
+            if (section.element) scrollToElement(section.element);
         }
 
         return (
-            <li key={i} className={isSelected ? 'selected' : ''} onClick={callback}>
+            <li key={key} className={isActive ? 'selected' : ''} onClick={selectElement}>
                 <div className='section-selector'>
-                    <FontAwesomeIcon className='ico' icon={node.ico} />
+                    <FontAwesomeIcon className='ico' icon={section.icon} />
                 </div>
             </li>
         )
     })
 
+    const progressPointerStyle = {
+        '--progress': `${Number(sectionsHook.getViewProgress().toFixed(3))*100}%`,
+    }
+
     return (
-        <ul>
+        <ul className='section-bubbles' style={progressPointerStyle}>
+            <div className='progress-pointer-box'>
+                <div className='progress-pointer'></div>
+            </div>
             { nodeElements }
         </ul>
     )
