@@ -1,0 +1,37 @@
+@import "/src/styles/variables";
+
+.custom-anchor {
+  color: inherit;
+  transition: all 0.1s ease-out;
+
+  &:not([disabled]) {
+    cursor: pointer;
+  }
+}
+
+.custom-anchor {
+  &.text {
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+
+    &:not([disabled]) {
+      &:hover {
+        filter: $base-drop-shadow;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &.icon {
+    .fa-icon {
+      height: $icon-size-m;
+    }
+
+    &:not([disabled]) {
+      &:hover {
+        filter: $base-drop-shadow;
+      }
+    }
+  }
+}

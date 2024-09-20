@@ -1,0 +1,44 @@
+button {
+  border: none;
+  background-color: transparent;
+
+  &:hover {
+    filter: $base-drop-shadow;
+  }
+
+  &:not([disabled]) {
+    cursor: pointer;
+  }
+
+  .icon-border {
+    position: relative;
+    border: white 3px solid;
+    border-radius: 100%;
+    width: $icon-size-r;
+    height: $icon-size-r;
+    padding: 4px;
+
+    transition: all 0.1s ease-out;
+
+    .fa-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      height: $icon-size-r;
+      color: white;
+    }
+  }
+}
+
+button {
+  &.active {
+    .icon-border {
+      background-color: white;
+
+      .fa-icon {
+        color: black;
+      }
+    }
+  }
+}

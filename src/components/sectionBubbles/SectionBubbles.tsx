@@ -1,45 +1,52 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import './SectionBubbles.scss';
-import { SectionsHookData } from '../../hooks/UseSections';
-import { scrollToElement } from '../../utils/BaseUtils';
-import { CSSProperties } from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./SectionBubbles.scss";
+import { SectionsHookData } from "../../hooks/UseSections";
+import { scrollToElement } from "../../utils/BaseUtils";
 
 export interface SectionBubblesProps {
-    sectionsHook: SectionsHookData,
+  sectionsHook: SectionsHookData;
+  plane: "horizontal" | "vertical";
 }
 
 export function SectionBubbles(props: SectionBubblesProps) {
-    const { sectionsHook } = props;
+  const { sectionsHook, plane } = props;
 
-    if (!sectionsHook.get) return;
+  if (!sectionsHook.get) return;
 
-    const nodeElements = Object.entries(sectionsHook.get).map(([key, section]) => {
-        const isActive = sectionsHook.activeSectionI === key;
-        
-        const selectElement = () => {
-            sectionsHook.setActiveSectionI(key);
-            if (section.element) scrollToElement(section.element);
-        }
+  const nodeElements = Object.entries(sectionsHook.get).map(
+    ([key, section]) => {
+      const isActive = sectionsHook.activeSectionI === key;
 
-        return (
-            <li key={key} className={isActive ? 'selected' : ''} onClick={selectElement}>
-                <div className='section-selector'>
-                    <FontAwesomeIcon className='ico' icon={section.icon} />
-                </div>
-            </li>
-        )
-    })
+      const selectElement = () => {
+        if (section.element) scrollToElement(section.element);
+      };
 
-    const progressPointerStyle = {
-        '--progress': `${Number(sectionsHook.getViewProgress().toFixed(3))*100}%`,
+      return (
+        <li
+          key={key}
+          className={isActive ? "selected" : ""}
+          onClick={selectElement}
+        >
+          <div className="section-selector">
+            <FontAwesomeIcon className="ico" icon={section.icon} />
+          </div>
+        </li>
+      );
     }
+  );
 
-    return (
-        <ul className='section-bubbles' style={progressPointerStyle}>
-            <div className='progress-pointer-box'>
-                <div className='progress-pointer'></div>
-            </div>
-            { nodeElements }
-        </ul>
-    )
+  const progressPointerStyle = {
+    "--progress": `${(Number(sectionsHook.getViewProgress()) * 100).toFixed(
+      1
+    )}%`,
+  } as React.CSSProperties;
+
+  return (
+    <ul className={`section-bubbles ${plane}`} style={progressPointerStyle}>
+      <div className="progress-pointer-box">
+        <div className="progress-pointer"></div>
+      </div>
+      {nodeElements}
+    </ul>
+  );
 }

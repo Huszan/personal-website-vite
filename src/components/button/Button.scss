@@ -1,0 +1,29 @@
+@import "/src/styles/variables";
+
+.custom-button {
+  display: inline;
+  padding: 0.8rem 3rem;
+  width: 150px;
+
+  box-sizing: content-box;
+  border-radius: 4px;
+
+  font-weight: 600;
+
+  .fa-icon {
+    display: inline;
+  }
+}
+
+.custom-button {
+  &.clear {
+    transition: all 0.1s ease-out;
+    border: 1px solid white;
+  }
+
+  &.solid {
+    transition: all 0.1s ease-out;
+    background-color: $color-accent;
+    color: $color-accent-font;
+  }
+}

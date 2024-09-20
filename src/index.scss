@@ -1,20 +1,31 @@
+@import "./styles/variables";
+@import "./styles/headers";
+@import "./styles/buttons";
+@import "./styles/text";
+@import "./styles/list";
+@import "./styles/unsorted";
+
+html,
+:root,
+#app {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
-  font-weight: 400;
+  font-size: 16px;
+  font-weight: 100;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: $color-primary;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  ::-webkit-scrollbar {
-    display: none;
-  }
 }
 
 body {

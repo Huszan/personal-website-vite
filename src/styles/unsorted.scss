@@ -1,0 +1,15 @@
+.tag-list {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+  .tag {
+    background: linear-gradient(60deg, $color-accent 80%, white 100%);
+    padding: 4px 18px;
+    border-radius: 20px;
+    color: $color-accent-font;
+    font-weight: 700;
+    font-size: 0.7rem;
+    filter: $mini-drop-shadow-b;
+  }
+}

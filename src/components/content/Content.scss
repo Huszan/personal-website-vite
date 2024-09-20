@@ -1,16 +1,14 @@
+@import "/src/styles/variables";
+
 #content {
-    min-height: 100vh;
-    grid-area: content;
+  min-height: 100vh;
+  grid-area: content;
 
-    section {
-        height: 100vh;
-    }
+  section {
+    height: 100vh;
+  }
 
-    :nth-child(odd) {
-        background-color: rgba(red, .2);
-    }
-
-    :nth-child(even) {
-        background-color: rgba(blue, .2);
-    }
+  section:nth-of-type(even) {
+    background-color: rgba($color-secondary, 1);
+  }
 }

@@ -1,0 +1,64 @@
+@import "/src/styles/variables";
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  all: unset;
+}
+
+h1 {
+  padding: 0 0 0 1rem;
+  font-size: 4rem;
+  line-height: 100%;
+  font-weight: 900;
+  margin-bottom: 2rem;
+  border-left: 0.5rem solid $color-accent;
+}
+
+h2 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 2.5rem;
+}
+
+h4 {
+  font-size: 2rem;
+}
+
+h5 {
+  font-size: 1.5rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+h3,
+h4,
+h5, 
+h6 {
+  font-weight: 400;
+  opacity: 0.95;
+}
+
+h1::before {
+  content: "";
+  height: 4rem;
+  width: 1rem;
+  background-color: $color-accent;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  &.sub {
+    opacity: 0.9;
+  }
+}

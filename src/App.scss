@@ -1,18 +1,10 @@
 #app {
-    min-height: 100vh;
-    display: grid;
-    grid-template-areas: 
-        "content header"
-        "footer header";
-    grid-template-rows: auto 300px;
-    grid-template-columns: auto 150px;
-}
-
-#app.sd {
-    grid-template-areas: 
-        "header"
-        "content"
-        "footer";
-    grid-template-rows: 100px auto 300px;
-    grid-template-columns: auto;
+  min-height: 100vh;
+  position: relative;
+  display: grid;
+  grid-template-areas:
+    "content"
+    "footer";
+  grid-template-rows: auto 150px;
+  grid-template-columns: auto;
 }

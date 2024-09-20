@@ -1,0 +1,43 @@
+@import "/src/styles/variables";
+
+button {
+  &.active {
+    .fa-icon {
+      &.slash-out {
+        visibility: visible;
+        animation: ungrow 0.2s linear forwards;
+      }
+    }
+  }
+
+  &:not(.active) {
+    .fa-icon {
+      &.slash-out {
+        visibility: visible;
+        animation: grow 0.2s linear forwards;
+      }
+    }
+  }
+}
+
+@keyframes grow {
+  from {
+    visibility: visible;
+    height: 0;
+  }
+  to {
+    visibility: visible;
+    height: calc($icon-size-r + 5px);
+  }
+}
+
+@keyframes ungrow {
+  from {
+    visibility: visible;
+    height: calc($icon-size-r + 5px);
+  }
+  to {
+    visibility: visible;
+    height: 0;
+  }
+}

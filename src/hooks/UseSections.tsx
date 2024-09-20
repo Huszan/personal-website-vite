@@ -1,118 +1,135 @@
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
-import { Dispatch, MutableRefObject, SetStateAction, useCallback, useEffect, useState } from "react"
+import {
+  Dispatch,
+  MutableRefObject,
+  SetStateAction,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { scrollToElement } from "../utils/BaseUtils";
 import { useLastScrollPosition } from "./UseLastScrollPosition";
 import { getMostVisibleSection } from "../utils/SectionUtils";
+import { GlobalContext } from "../context/GlobalContextComponent";
 
 export interface Section {
-    name: string,
-    icon: IconDefinition,
-    index: number,
-    element?: HTMLElement | undefined,
-    useBubble: boolean,
+  name: string;
+  icon: IconDefinition;
+  index: number;
+  element?: HTMLElement | undefined;
+  useBubble: boolean;
 }
 
 export interface SectionRecords {
-    [id: string]: Section
+  [id: string]: Section;
 }
 
 export interface SectionsHookData {
-    get: SectionRecords,
-    setSections: Dispatch<SetStateAction<SectionRecords>>,
-    setSection: (section: Section) => void,
-    setSectionElement: (id: string, ref: MutableRefObject<HTMLElement | null>) => void,
-    activeSectionI: string | null,
-    setActiveSectionI: Dispatch<SetStateAction<string | null>>,
-    getViewProgress: () => number,
+  get: SectionRecords;
+  setSections: Dispatch<SetStateAction<SectionRecords>>;
+  setSection: (section: Section) => void;
+  setSectionElement: (
+    id: string,
+    ref: MutableRefObject<HTMLElement | null>
+  ) => void;
+  activeSectionI: string | null;
+  setActiveSectionI: Dispatch<SetStateAction<string | null>>;
+  getViewProgress: () => number;
 }
 
-export function useSections(
-    initialSections: SectionRecords = {}
-) {
-    const [sections, setSections] = useState<SectionRecords>(initialSections);
-    const [activeSectionI, setActiveSectionI] = useState<string | null>(null);
-    const lastScrollPosition = useLastScrollPosition();
+export function useSections(initialSections: SectionRecords = {}) {
+  const { config } = useContext(GlobalContext)!;
+  const [sections, setSections] = useState<SectionRecords>(initialSections);
+  const [activeSectionI, setActiveSectionI] = useState<string | null>(null);
+  const lastScrollPosition = useLastScrollPosition();
 
-    function set(section: Section) {
-        setSections((prev) => {
-            return {
-                ...prev,
-                section
-            }
-        })
+  function set(section: Section) {
+    setSections((prev) => {
+      return {
+        ...prev,
+        section,
+      };
+    });
+  }
+
+  function setSectionElement(
+    id: string,
+    ref: MutableRefObject<HTMLElement | null>
+  ) {
+    if (!ref || !ref.current || !sections[id]) return;
+    setSections((prev) => {
+      const nextEl = {
+        ...prev[id],
+        element: ref.current,
+      } as Section;
+
+      return {
+        ...prev,
+        [id]: nextEl,
+      };
+    });
+  }
+
+  function getSectionElements() {
+    return Object.values(sections)
+      .map((el) => el.element)
+      .filter((el) => el);
+  }
+
+  function getViewProgress() {
+    const elements = getSectionElements();
+    if (!elements || elements.length === 0) return 0;
+    let pixelsDown = -elements[0]!.getBoundingClientRect().top;
+    elements.shift();
+    let progress = 0;
+    for (const el of elements) {
+      if (!el) return 0;
+      const maxProgress = 1 / elements.length;
+      if (pixelsDown - el.offsetHeight >= 0) progress += maxProgress;
+      else {
+        progress += (pixelsDown / el.offsetHeight) * maxProgress;
+        break;
+      }
+      pixelsDown -= el.offsetHeight;
     }
+    const progressClamp = Math.min(100, Math.max(progress, 0));
+    return progressClamp;
+  }
 
-    function setSectionElement(
-        id: string, 
-        ref: MutableRefObject<HTMLElement | null>,
-    ) {
-        if (!ref || !ref.current || !sections[id]) return;
-        setSections((prev) => {
-            const nextEl = {
-                ...prev[id],
-                element: ref.current,
-            } as Section;
+  const areSectionsInitialized = useCallback(() => {
+    return Object.values(sections).filter((el) => el.element).length > 0;
+  }, [sections]);
 
-            return {
-                ...prev,
-                [id]: nextEl
-            }
-        })
-    }
+  useEffect(() => {
+    if (!areSectionsInitialized()) return;
 
-    function getSectionElements() {
-        return Object.values(sections).map(el => el.element).filter(el => el);
-    }
+    const mostVisibleI = getMostVisibleSection(sections);
+    setActiveSectionI(mostVisibleI);
+  }, [lastScrollPosition.scrollPosition, sections, areSectionsInitialized]);
 
-    function getViewProgress() {
-        const elements = getSectionElements();
-        if (!elements || elements.length === 0) return 0;
-        let pixelsDown = -elements[0]!.getBoundingClientRect().top;
-        elements.shift();
-        let progress = 0;
-        for (const el of elements) {
-            if (!el) return 0;
-            const maxProgress = 1 / elements.length;
-            if (pixelsDown - el.offsetHeight >= 0) progress += maxProgress;
-            else {
-                progress += (pixelsDown / el.offsetHeight) * maxProgress;
-                break;
-            }
-            pixelsDown -= el.offsetHeight;
-        }
-        const progressClamp = Math.min(100, Math.max(progress, 0));
-        return progressClamp;
-    }
+  useEffect(() => {
+    if (!config.centerOnSection) return;
 
-    const areSectionsInitialized = useCallback(() => {
-        return Object.values(sections).filter(el => el.element).length > 0;
-    }, [sections])
+    const timeout = setTimeout(() => {
+      if (activeSectionI === null || !sections[activeSectionI].element) return;
+      scrollToElement(sections[activeSectionI].element);
+    }, 500);
 
-    useEffect(() => {
-        if (!areSectionsInitialized()) return;
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [activeSectionI, config.centerOnSection]);
 
-        const mostVisibleI = getMostVisibleSection(sections);
-        setActiveSectionI(mostVisibleI);
+  const sectionsData: SectionsHookData = {
+    get: sections,
+    setSections,
+    setSection: set,
+    setSectionElement,
+    activeSectionI,
+    setActiveSectionI,
+    getViewProgress,
+  };
 
-        const timeout = setTimeout(() => {
-            if (activeSectionI === null || !sections[activeSectionI].element) return;
-            scrollToElement(sections[activeSectionI].element);
-        }, 500)
-
-        return () => {
-            clearTimeout(timeout);
-        }
-    }, [lastScrollPosition.scrollPosition, activeSectionI, sections, areSectionsInitialized])
-
-    const sectionsData: SectionsHookData = {
-        get: sections,
-        setSections,
-        setSection: set,
-        setSectionElement,
-        activeSectionI,
-        setActiveSectionI,
-        getViewProgress,
-    }
-
-    return sectionsData;
+  return sectionsData;
 }
