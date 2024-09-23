@@ -1,5 +1,5 @@
-import { useLastScrollPosition } from "../../hooks/UseLastScrollPosition";
 import "./ScrollMoveBackground.scss";
+import { useGlobalContext } from "../../hooks/UseGlobalContext";
 
 interface ScrollMoveBackgroundProps {
   bgSrc: string;
@@ -7,9 +7,11 @@ interface ScrollMoveBackgroundProps {
 
 export const ScrollMoveBackground = (props: ScrollMoveBackgroundProps) => {
   const { bgSrc } = props;
-  const { scrollPosition } = useLastScrollPosition();
+  const { lastScroll } = useGlobalContext();
+
   const percentFromTop = (
-    (scrollPosition.y / (document.body.offsetHeight - window.innerHeight)) *
+    (lastScroll.position.y /
+      (document.body.offsetHeight - window.innerHeight)) *
     100
   ).toFixed(1);
 

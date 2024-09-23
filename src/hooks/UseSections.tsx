@@ -9,9 +9,10 @@ import {
   useState,
 } from "react";
 import { scrollToElement } from "../utils/BaseUtils";
-import { useLastScrollPosition } from "./UseLastScrollPosition";
+import { useScrollData } from "./UseScrollData";
 import { getMostVisibleSection } from "../utils/SectionUtils";
 import { GlobalContext } from "../context/GlobalContextComponent";
+import { useGlobalContext } from "./UseGlobalContext";
 
 export interface Section {
   name: string;
@@ -39,10 +40,9 @@ export interface SectionsHookData {
 }
 
 export function useSections(initialSections: SectionRecords = {}) {
-  const { config } = useContext(GlobalContext)!;
+  const { config, lastScroll } = useGlobalContext();
   const [sections, setSections] = useState<SectionRecords>(initialSections);
   const [activeSectionI, setActiveSectionI] = useState<string | null>(null);
-  const lastScrollPosition = useLastScrollPosition();
 
   function set(section: Section) {
     setSections((prev) => {
@@ -106,20 +106,20 @@ export function useSections(initialSections: SectionRecords = {}) {
 
     const mostVisibleI = getMostVisibleSection(sections);
     setActiveSectionI(mostVisibleI);
-  }, [lastScrollPosition.scrollPosition, sections, areSectionsInitialized]);
+  }, [lastScroll.position, sections, areSectionsInitialized]);
 
   useEffect(() => {
     if (!config.centerOnSection) return;
+    if (activeSectionI === null || !sections[activeSectionI].element) return;
 
     const timeout = setTimeout(() => {
-      if (activeSectionI === null || !sections[activeSectionI].element) return;
       scrollToElement(sections[activeSectionI].element);
     }, 500);
 
     return () => {
       clearTimeout(timeout);
     };
-  }, [activeSectionI, config.centerOnSection]);
+  }, [lastScroll.position, activeSectionI, config.centerOnSection, sections]);
 
   const sectionsData: SectionsHookData = {
     get: sections,

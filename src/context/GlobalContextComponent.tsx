@@ -1,8 +1,10 @@
 import { createContext } from "react";
 import useConfig, { ConfigData } from "../hooks/UseConfig";
+import { ScrollData, useScrollData } from "../hooks/UseScrollData";
 
-interface GlobalContextData {
+export interface GlobalContextData {
   config: ConfigData;
+  lastScroll: ScrollData;
 }
 
 export const GlobalContext = createContext<GlobalContextData | undefined>(
@@ -18,9 +20,11 @@ export default function GlobalContextComponent(
 ) {
   const { children } = props;
   const config = useConfig();
+  const lastScroll = useScrollData();
 
   const contextValue: GlobalContextData = {
     config,
+    lastScroll,
   };
 
   return (
