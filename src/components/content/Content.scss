@@ -4,11 +4,28 @@
   min-height: 100vh;
   grid-area: content;
 
-  section {
-    height: 100vh;
+  .main-section {
+    min-height: 100vh;
+    width: 100vw;
+    padding: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    box-sizing: border-box;
+
+    overflow: hidden;
   }
 
   section:nth-of-type(even) {
-    background-color: rgba($color-secondary, 1);
+    background-color: rgba($color-secondary, 0.3);
+    backdrop-filter: blur(3px);
+  }
+}
+
+.md #content {
+  .main-section {
+    padding: 2rem 5rem;
   }
 }

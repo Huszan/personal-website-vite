@@ -4,14 +4,11 @@ import {
   MutableRefObject,
   SetStateAction,
   useCallback,
-  useContext,
   useEffect,
   useState,
 } from "react";
 import { scrollToElement } from "../utils/BaseUtils";
-import { useScrollData } from "./UseScrollData";
 import { getMostVisibleSection } from "../utils/SectionUtils";
-import { GlobalContext } from "../context/GlobalContextComponent";
 import { useGlobalContext } from "./UseGlobalContext";
 
 export interface Section {
@@ -74,25 +71,28 @@ export function useSections(initialSections: SectionRecords = {}) {
   function getSectionElements() {
     return Object.values(sections)
       .map((el) => el.element)
-      .filter((el) => el);
+      .filter((el) => el !== undefined);
   }
 
   function getViewProgress() {
     const elements = getSectionElements();
-    if (!elements || elements.length === 0) return 0;
-    let pixelsDown = -elements[0]!.getBoundingClientRect().top;
+    if (elements.length === 0) return 0;
+
     elements.shift();
+    const maxProgress = 1 / elements.length;
     let progress = 0;
     for (const el of elements) {
-      if (!el) return 0;
-      const maxProgress = 1 / elements.length;
-      if (pixelsDown - el.offsetHeight >= 0) progress += maxProgress;
-      else {
-        progress += (pixelsDown / el.offsetHeight) * maxProgress;
+      const rect = el.getBoundingClientRect();
+      const offset = Math.min(window.innerHeight, el.offsetHeight);
+      const thingy = (rect.top - window.innerHeight) / offset;
+
+      if (thingy <= -1) progress += maxProgress;
+      else if (thingy < 0) {
+        progress += Math.abs(thingy) * maxProgress;
         break;
       }
-      pixelsDown -= el.offsetHeight;
     }
+
     const progressClamp = Math.min(100, Math.max(progress, 0));
     return progressClamp;
   }
@@ -119,7 +119,7 @@ export function useSections(initialSections: SectionRecords = {}) {
     return () => {
       clearTimeout(timeout);
     };
-  }, [lastScroll.position, activeSectionI, config.centerOnSection, sections]);
+  }, [activeSectionI]);
 
   const sectionsData: SectionsHookData = {
     get: sections,

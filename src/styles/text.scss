@@ -1,3 +1,7 @@
+.t-center {
+  text-align: center;
+}
+
 .t-acc {
   color: $color-accent;
 }
@@ -8,4 +12,12 @@
 
 .t-acc-3 {
   color: $color-accent-3;
+}
+
+.t-sub {
+  opacity: 0.9;
+}
+
+.t-sub-2 {
+  opacity: 0.7;
 }

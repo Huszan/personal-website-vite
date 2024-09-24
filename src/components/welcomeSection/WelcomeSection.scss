@@ -1,15 +1,6 @@
 @import "/src/styles/variables";
 
 .welcome-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  padding: 20px 20px;
-  box-sizing: border-box;
-
-  overflow: hidden;
-
   .about-me-wrapper {
     display: flex;
     flex-direction: column;
@@ -29,14 +20,16 @@
 }
 
 .md {
-  .welcome-section {
-    flex-direction: row;
-    gap: 2rem;
-    padding: 60px;
+  #content {
+    .welcome-section {
+      flex-direction: row;
+      gap: 2rem;
+      padding: 60px;
 
-    .personal-image {
-      width: 100%;
-      max-width: 500px;
+      .personal-image {
+        width: 100%;
+        max-width: 500px;
+      }
     }
   }
 }

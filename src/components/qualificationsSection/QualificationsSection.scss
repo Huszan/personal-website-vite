@@ -1,0 +1,40 @@
+#content {
+  .qual-section {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-auto-rows: auto;
+    justify-items: center;
+    gap: 2rem;
+
+    ul {
+      max-width: 500px;
+      width: 100%;
+      align-self: start;
+      list-style: disc;
+
+      li {
+        display: list-item;
+        margin-left: 2rem;
+        margin-top: 1rem;
+
+        .exp-desc {
+          margin-top: 1rem;
+        }
+      }
+    }
+  }
+}
+
+.md #content {
+  .qual-section {
+    grid-template-columns: 50% 50%;
+
+    h1 {
+      grid-column: 1 / 3;
+    }
+
+    .qual-wrapper {
+      flex-direction: row;
+    }
+  }
+}

@@ -1,5 +1,13 @@
 @import "/src/styles/variables";
 
+$md-fs: 3.5rem;
+$h1-fs: 3rem;
+$h2-fs: 2rem;
+$h3-fs: 1.75rem;
+$h4-fs: 1.5rem;
+$h5-fs: 1.3rem;
+$h6-fs: 1.2rem;
+
 h1,
 h2,
 h3,
@@ -7,58 +15,68 @@ h4,
 h5,
 h6 {
   all: unset;
+  display: block;
 }
 
 h1 {
-  padding: 0 0 0 1rem;
-  font-size: 4rem;
+  font-size: $h1-fs;
   line-height: 100%;
   font-weight: 900;
   margin-bottom: 2rem;
+  letter-spacing: -0.15rem;
+  padding: 0 0 0 1rem;
+  border-left: 0.5rem solid $color-accent;
+}
+
+.md h1 {
+  font-size: $md-fs;
   border-left: 0.5rem solid $color-accent;
 }
 
 h2 {
-  font-size: 3rem;
+  font-size: $h2-fs;
   font-weight: 700;
 }
 
+.md h2 {
+  font-size: $h1-fs;
+}
+
 h3 {
-  font-size: 2.5rem;
+  font-size: $h3-fs;
+  font-weight: 500;
+}
+
+.md h3 {
+  font-size: $h2-fs;
 }
 
 h4 {
-  font-size: 2rem;
+  font-size: $h4-fs;
+}
+
+.md h4 {
+  font-size: $h3-fs;
 }
 
 h5 {
-  font-size: 1.5rem;
+  font-size: $h5-fs;
+}
+
+.md h5 {
+  font-size: $h4-fs;
 }
 
 h6 {
-  font-size: 1rem;
+  font-size: $h6-fs;
 }
 
-h3,
-h4,
-h5, 
-h6 {
-  font-weight: 400;
-  opacity: 0.95;
+.md h6 {
+  font-size: $h5-fs;
 }
 
-h1::before {
-  content: "";
-  height: 4rem;
-  width: 1rem;
-  background-color: $color-accent;
-}
-
-h3,
 h4,
 h5,
 h6 {
-  &.sub {
-    opacity: 0.9;
-  }
+  font-weight: 400;
 }
