@@ -2,6 +2,7 @@ import { forwardRef } from "react";
 import "./QualificationsSection.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMedal, faUniversity } from "@fortawesome/free-solid-svg-icons";
+import SeeMore from "../seeMore/SeeMore";
 
 const QualificationsSection = forwardRef<HTMLElement>((props, ref) => {
   return (
@@ -29,7 +30,7 @@ const QualificationsSection = forwardRef<HTMLElement>((props, ref) => {
           <h6>Software Developer</h6>
           <div className="t-sub">Robin FUH Robert Sęk</div>
           <div className="t-sub-2">Dec 2023 - May 2024</div>
-          <div className="exp-desc">
+          <SeeMore className="exp-desc">
             I've been developing a desktop application called Excel Merger
             Assistant, designed to streamline the{" "}
             <b>management and protection of data</b> from Excel report tables.{" "}
@@ -37,13 +38,13 @@ const QualificationsSection = forwardRef<HTMLElement>((props, ref) => {
             This tool simplifies the process and provides users with a
             <b>user-friendly interface</b> featuring capabilities to easily{" "}
             <b>filter</b>, <b>modify</b>, and <b>validate</b> data.
-          </div>
+          </SeeMore>
         </li>
         <li>
           <h6>Front-end Developer</h6>
           <div className="t-sub">Digis</div>
           <div className="t-sub-2">Jan 2023 - Jun 2023</div>
-          <div className="exp-desc">
+          <SeeMore className="exp-desc">
             This was my first job and I learned how to collaborate with other
             developers using <b>Agile</b> methodology. At first, I worked on{" "}
             <b>fixing bugs</b> and <b>expanding existing components</b> with new
@@ -52,37 +53,7 @@ const QualificationsSection = forwardRef<HTMLElement>((props, ref) => {
             worked on <b>creating new components</b> and{" "}
             <b>modifying existing ones</b> based on mockups,{" "}
             <b>creating animations</b>, and <b>fixing bugs</b> in the code.
-          </div>
-          <div className="exp-desc">
-            This was my first job and I learned how to collaborate with other
-            developers using <b>Agile</b> methodology. At first, I worked on{" "}
-            <b>fixing bugs</b> and <b>expanding existing components</b> with new
-            functionalities. <br />
-            Then, I was assigned to a team focused on creating a UI overhaul. I
-            worked on <b>creating new components</b> and{" "}
-            <b>modifying existing ones</b> based on mockups,{" "}
-            <b>creating animations</b>, and <b>fixing bugs</b> in the code.
-          </div>
-          <div className="exp-desc">
-            This was my first job and I learned how to collaborate with other
-            developers using <b>Agile</b> methodology. At first, I worked on{" "}
-            <b>fixing bugs</b> and <b>expanding existing components</b> with new
-            functionalities. <br />
-            Then, I was assigned to a team focused on creating a UI overhaul. I
-            worked on <b>creating new components</b> and{" "}
-            <b>modifying existing ones</b> based on mockups,{" "}
-            <b>creating animations</b>, and <b>fixing bugs</b> in the code.
-          </div>
-          <div className="exp-desc">
-            This was my first job and I learned how to collaborate with other
-            developers using <b>Agile</b> methodology. At first, I worked on{" "}
-            <b>fixing bugs</b> and <b>expanding existing components</b> with new
-            functionalities. <br />
-            Then, I was assigned to a team focused on creating a UI overhaul. I
-            worked on <b>creating new components</b> and{" "}
-            <b>modifying existing ones</b> based on mockups,{" "}
-            <b>creating animations</b>, and <b>fixing bugs</b> in the code.
-          </div>
+          </SeeMore>
         </li>
       </ul>
     </section>

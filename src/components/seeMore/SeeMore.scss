@@ -1,0 +1,14 @@
+@import "/src/styles/variables";
+
+.see-more {
+  .children-wrapper {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .see-more-button {
+    color: $color-accent;
+  }
+}

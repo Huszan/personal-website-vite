@@ -33,3 +33,24 @@ export function downloadFile(id: string) {
   const el = document.getElementById(id);
   if (el) el.click();
 }
+
+export function getChildrenHeight(element: HTMLElement) {
+  const totalHeight = Array.from(element.children).reduce((total, child) => {
+    return total + (child as HTMLElement).offsetHeight;
+  }, 0);
+  return totalHeight;
+}
+
+export function convertRemToPx(x: number) {
+  const fontSize = parseFloat(
+    getComputedStyle(document.documentElement).fontSize
+  );
+  return x * fontSize;
+}
+
+export function isElementOverflown(element: HTMLElement) {
+  return (
+    element.scrollHeight > element.clientHeight ||
+    element.scrollWidth > element.clientWidth
+  );
+}
