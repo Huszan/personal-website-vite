@@ -1,0 +1,41 @@
+@import "/src/styles/variables";
+
+#content {
+  .skills-section {
+    .skills-wrapper {
+      display: grid;
+      grid-template-columns: repeat(2, 6rem);
+      grid-auto-rows: auto;
+      gap: 2rem;
+      align-items: center;
+      justify-items: center;
+
+      margin: auto;
+
+      border-radius: 5px;
+
+      .skill {
+        .icon {
+          padding: 15%;
+          width: 100%;
+          height: auto;
+          aspect-ratio: 1 / 1;
+          border-radius: 5px;
+          box-sizing: border-box;
+          filter: $base-drop-shadow-b;
+          margin-bottom: 0.5rem;
+        }
+        .desc {
+          text-align: center;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
+
+.md #content .skills-section {
+  .skills-wrapper {
+    grid-template-columns: repeat(4, 8rem);
+  }
+}

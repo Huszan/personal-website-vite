@@ -14,10 +14,10 @@ $color-accent-2-font: #171717;
 $color-accent-3: #e0d8de;
 $color-accent-3-font: #171717;
 
-$mini-drop-shadow: drop-shadow(white 1px 1px 3px);
-$mini-drop-shadow-b: drop-shadow(black 1px 1px 3px);
-$base-drop-shadow: drop-shadow(white 0 0 8px);
-$base-drop-shadow-b: drop-shadow(black 0 0 8px);
+$mini-drop-shadow: drop-shadow(rgba(255, 255, 255, 0.8) 1px 1px 3px);
+$mini-drop-shadow-b: drop-shadow(rgba(0, 0, 0, 0.8) 1px 1px 3px);
+$base-drop-shadow: drop-shadow(rgba(255, 255, 255, 0.8) 4px 4px 4px);
+$base-drop-shadow-b: drop-shadow(rgba(0, 0, 0, 0.8) 4px 4px 2px);
 
 $icon-size-r: 1rem;
 $icon-size-m: 1.5rem;

@@ -3,7 +3,7 @@ button {
   background-color: transparent;
 
   &:hover {
-    filter: $base-drop-shadow;
+    filter: $mini-drop-shadow;
   }
 
   &:not([disabled]) {

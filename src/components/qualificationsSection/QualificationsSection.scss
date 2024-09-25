@@ -4,7 +4,12 @@
     grid-template-columns: 100%;
     grid-auto-rows: auto;
     justify-items: center;
+    align-items: center;
     gap: 2rem;
+
+    h1 {
+      align-self: flex-start;
+    }
 
     ul {
       max-width: 500px;

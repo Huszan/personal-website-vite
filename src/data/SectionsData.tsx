@@ -1,4 +1,5 @@
 import {
+  faGear,
   faProjectDiagram,
   faShoePrints,
   faUniversity,
@@ -14,21 +15,27 @@ export const sectionsData: SectionRecords = {
     useBubble: true,
   },
   1: {
-    name: "Education",
+    name: "Qualifications",
     icon: faUniversity,
     index: 1,
     useBubble: true,
   },
   2: {
-    name: "Projects",
-    icon: faProjectDiagram,
+    name: "Technologies",
+    icon: faGear,
     index: 2,
     useBubble: true,
   },
   3: {
+    name: "Projects",
+    icon: faProjectDiagram,
+    index: 3,
+    useBubble: true,
+  },
+  4: {
     name: "Footer",
     icon: faShoePrints,
-    index: 3,
+    index: 4,
     useBubble: false,
   },
 };

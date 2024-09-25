@@ -17,7 +17,7 @@
 
     &:not([disabled]) {
       &:hover {
-        filter: $base-drop-shadow;
+        filter: $mini-drop-shadow;
         text-decoration: underline;
       }
     }
@@ -30,7 +30,7 @@
 
     &:not([disabled]) {
       &:hover {
-        filter: $base-drop-shadow;
+        filter: $mini-drop-shadow;
       }
     }
   }
