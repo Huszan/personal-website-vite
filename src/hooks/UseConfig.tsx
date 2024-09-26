@@ -1,16 +1,16 @@
-import { useState } from "react";
+import useStorage from "./UseStorage";
 
 export interface ConfigData {
   centerOnSection: boolean;
   setCenterOnSection: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const useConfig: () => ConfigData = () => {
-  const [centerOnSection, setCenterOnSection] = useState(true);
+const useConfig = () => {
+  const centerOnSection = useStorage<boolean>({ key: "conf_cos", val: false });
 
   return {
-    centerOnSection,
-    setCenterOnSection,
+    centerOnSection: centerOnSection.get,
+    setCenterOnSection: centerOnSection.set,
   } as ConfigData;
 };
 

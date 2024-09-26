@@ -113,8 +113,8 @@ export function useSections(initialSections: SectionRecords = {}) {
     setSections,
     setSection: set,
     setSectionElement,
-    activeSectionKey: activeSectionKey,
-    setActiveSectionKey: setActiveSectionKey,
+    activeSectionKey,
+    setActiveSectionKey,
     viewProgress,
   };
 
