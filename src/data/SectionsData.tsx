@@ -1,16 +1,16 @@
 import {
   faGear,
-  faHandshake,
   faProjectDiagram,
   faShoePrints,
   faUniversity,
 } from "@fortawesome/free-solid-svg-icons";
 import { SectionRecords } from "../hooks/UseSections";
+import { faHandWave } from "../assets/icons/fa-hand-wave";
 
 export const sectionsData: SectionRecords = {
   welcome: {
     name: "Welcome",
-    icon: faHandshake,
+    icon: faHandWave,
     useBubble: true,
   },
   qualifications: {
