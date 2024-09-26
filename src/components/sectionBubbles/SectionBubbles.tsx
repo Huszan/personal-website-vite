@@ -15,7 +15,7 @@ export function SectionBubbles(props: SectionBubblesProps) {
 
   const nodeElements = Object.entries(sectionsHook.get).map(
     ([key, section]) => {
-      const isActive = sectionsHook.activeSectionI === key;
+      const isActive = sectionsHook.activeSectionKey === key;
 
       const selectElement = () => {
         if (section.element) scrollToElement(section.element);
@@ -36,9 +36,7 @@ export function SectionBubbles(props: SectionBubblesProps) {
   );
 
   const progressPointerStyle = {
-    "--progress": `${(Number(sectionsHook.getViewProgress()) * 100).toFixed(
-      1
-    )}%`,
+    "--progress": `${(Number(sectionsHook.viewProgress) * 100).toFixed(1)}%`,
   } as React.CSSProperties;
 
   return (

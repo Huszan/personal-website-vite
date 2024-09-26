@@ -1,12 +1,5 @@
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
-import {
-  Dispatch,
-  MutableRefObject,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 import { scrollToElement } from "../utils/BaseUtils";
 import { getMostVisibleSection } from "../utils/SectionUtils";
 import { useGlobalContext } from "./UseGlobalContext";
@@ -14,32 +7,28 @@ import { useGlobalContext } from "./UseGlobalContext";
 export interface Section {
   name: string;
   icon: IconDefinition;
-  index: number;
   element?: HTMLElement | undefined;
   useBubble: boolean;
 }
 
 export interface SectionRecords {
-  [id: string]: Section;
+  [key: string]: Section;
 }
 
 export interface SectionsHookData {
   get: SectionRecords;
   setSections: Dispatch<SetStateAction<SectionRecords>>;
   setSection: (section: Section) => void;
-  setSectionElement: (
-    id: string,
-    ref: MutableRefObject<HTMLElement | null>
-  ) => void;
-  activeSectionI: string | null;
-  setActiveSectionI: Dispatch<SetStateAction<string | null>>;
-  getViewProgress: () => number;
+  setSectionElement: (key: string, element: HTMLElement) => void;
+  activeSectionKey: string | null;
+  setActiveSectionKey: Dispatch<SetStateAction<string | null>>;
+  viewProgress: number;
 }
 
 export function useSections(initialSections: SectionRecords = {}) {
   const { config, lastScroll } = useGlobalContext();
   const [sections, setSections] = useState<SectionRecords>(initialSections);
-  const [activeSectionI, setActiveSectionI] = useState<string | null>(null);
+  const [activeSectionKey, setActiveSectionKey] = useState<string | null>(null);
 
   function set(section: Section) {
     setSections((prev) => {
@@ -50,85 +39,83 @@ export function useSections(initialSections: SectionRecords = {}) {
     });
   }
 
-  function setSectionElement(
-    id: string,
-    ref: MutableRefObject<HTMLElement | null>
-  ) {
-    if (!ref || !ref.current || !sections[id]) return;
+  const setSectionElement = (key: string, element: HTMLElement) => {
+    if (!element || !sections[key] || sections[key].element) return;
     setSections((prev) => {
       const nextEl = {
-        ...prev[id],
-        element: ref.current,
+        ...prev[key],
+        element: element,
       } as Section;
 
       return {
         ...prev,
-        [id]: nextEl,
+        [key]: nextEl,
       };
     });
-  }
+  };
 
-  function getSectionElements() {
+  const sectionElements = useMemo(() => {
     return Object.values(sections)
       .map((el) => el.element)
       .filter((el) => el !== undefined);
-  }
+  }, [sections]);
 
-  function getViewProgress() {
-    const elements = getSectionElements();
-    if (elements.length === 0) return 0;
+  const viewProgress = useMemo(() => {
+    if (sectionElements.length === 0) return 0;
 
-    elements.shift();
-    const maxProgress = 1 / elements.length;
+    const maxProgress = 1 / (sectionElements.length - 1);
     let progress = 0;
-    for (const el of elements) {
+    for (let i = 1; i < sectionElements.length; i++) {
+      const el = sectionElements[i];
       const rect = el.getBoundingClientRect();
       const offset = Math.min(window.innerHeight, el.offsetHeight);
-      const thingy = (rect.top - window.innerHeight) / offset;
+      const distance = (rect.top - window.innerHeight) / offset;
 
-      if (thingy <= -1) progress += maxProgress;
-      else if (thingy < 0) {
-        progress += Math.abs(thingy) * maxProgress;
+      if (distance <= -1) progress += maxProgress;
+      else if (distance < 0) {
+        progress += Math.abs(distance) * maxProgress;
         break;
       }
     }
 
     const progressClamp = Math.min(100, Math.max(progress, 0));
     return progressClamp;
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sectionElements, lastScroll.position]);
 
-  const areSectionsInitialized = useCallback(() => {
+  const areSectionsInitialized = useMemo(() => {
     return Object.values(sections).filter((el) => el.element).length > 0;
   }, [sections]);
 
   useEffect(() => {
-    if (!areSectionsInitialized()) return;
+    if (!areSectionsInitialized) return;
 
-    const mostVisibleI = getMostVisibleSection(sections);
-    setActiveSectionI(mostVisibleI);
+    const mostVisibleKey = getMostVisibleSection(sections);
+    setActiveSectionKey(mostVisibleKey);
   }, [lastScroll.position, sections, areSectionsInitialized]);
 
   useEffect(() => {
     if (!config.centerOnSection) return;
-    if (activeSectionI === null || !sections[activeSectionI].element) return;
+    if (activeSectionKey === null || !sections[activeSectionKey].element)
+      return;
 
     const timeout = setTimeout(() => {
-      scrollToElement(sections[activeSectionI].element);
+      scrollToElement(sections[activeSectionKey].element);
     }, 500);
 
     return () => {
       clearTimeout(timeout);
     };
-  }, [activeSectionI]);
+  }, [activeSectionKey, config, sections]);
 
   const sectionsData: SectionsHookData = {
     get: sections,
     setSections,
     setSection: set,
     setSectionElement,
-    activeSectionI,
-    setActiveSectionI,
-    getViewProgress,
+    activeSectionKey: activeSectionKey,
+    setActiveSectionKey: setActiveSectionKey,
+    viewProgress,
   };
 
   return sectionsData;

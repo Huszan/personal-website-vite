@@ -11,10 +11,11 @@ export function Footer(props: FooterProps) {
   const refFooter: MutableRefObject<HTMLElement | null> = useRef(null);
 
   const { sectionsHook } = props;
+  const shRef = useRef(sectionsHook);
 
   useEffect(() => {
-    if (sectionsHook.get["4"].element || !refFooter.current) return;
-    sectionsHook.setSectionElement("4", refFooter);
+    if (!refFooter.current) return;
+    shRef.current.setSectionElement("footer", refFooter.current);
   }, [refFooter]);
 
   return (

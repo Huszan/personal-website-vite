@@ -1,25 +1,29 @@
 @import "/src/styles/variables";
 
-.welcome-section {
-  .about-me-wrapper {
-    display: flex;
-    flex-direction: column;
-  }
+#content {
+  .welcome-section {
+    justify-content: space-evenly;
 
-  .personal-image {
-    width: 100%;
-    max-width: 350px;
-  }
+    .about-me-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
 
-  .buttons-wrap {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 2rem;
-    gap: 1rem;
-  }
+    .personal-image {
+      width: 100%;
+      max-width: 350px;
+    }
 
-  .social-links {
-    margin-top: 2rem;
+    .buttons-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+      gap: 1rem;
+    }
+
+    .social-links {
+      margin-top: 2rem;
+    }
   }
 }
 
@@ -27,6 +31,7 @@
   #content {
     .welcome-section {
       flex-direction: row;
+      justify-content: center;
       gap: 2rem;
       padding: 60px;
 

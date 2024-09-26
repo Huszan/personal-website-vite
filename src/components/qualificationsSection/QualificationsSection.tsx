@@ -35,7 +35,7 @@ const QualificationsSection = forwardRef<HTMLElement>((props, ref) => {
             Assistant, designed to streamline the{" "}
             <b>management and protection of data</b> from Excel report tables.{" "}
             <br />
-            This tool simplifies the process and provides users with a
+            This tool simplifies the process and provides users with a{" "}
             <b>user-friendly interface</b> featuring capabilities to easily{" "}
             <b>filter</b>, <b>modify</b>, and <b>validate</b> data.
           </SeeMore>

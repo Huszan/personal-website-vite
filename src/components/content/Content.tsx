@@ -16,26 +16,29 @@ export function Content(props: ContentProps) {
   const refProjects: MutableRefObject<HTMLElement | null> = useRef(null);
 
   const { sectionsHook } = props;
+  const shRef = useRef(sectionsHook);
 
   useEffect(() => {
-    if (props.sectionsHook.get["0"].element || !refWelcome.current) return;
-    sectionsHook.setSectionElement("0", refWelcome);
+    if (!refWelcome.current) return;
+    shRef.current.setSectionElement("welcome", refWelcome.current);
   }, [refWelcome]);
 
   useEffect(() => {
-    if (props.sectionsHook.get["1"].element || !refQualifications.current)
-      return;
-    sectionsHook.setSectionElement("1", refQualifications);
+    if (!refQualifications.current) return;
+    shRef.current.setSectionElement(
+      "qualifications",
+      refQualifications.current
+    );
   }, [refQualifications]);
 
   useEffect(() => {
-    if (props.sectionsHook.get["2"].element || !refSkills.current) return;
-    sectionsHook.setSectionElement("2", refSkills);
+    if (!refSkills.current) return;
+    shRef.current.setSectionElement("skills", refSkills.current);
   }, [refSkills]);
 
   useEffect(() => {
-    if (props.sectionsHook.get["3"].element || !refProjects.current) return;
-    sectionsHook.setSectionElement("3", refProjects);
+    if (!refProjects.current) return;
+    shRef.current.setSectionElement("projects", refProjects.current);
   }, [refProjects]);
 
   return (

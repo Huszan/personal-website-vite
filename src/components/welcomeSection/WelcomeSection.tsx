@@ -3,8 +3,6 @@ import "./WelcomeSection.scss";
 import { Button } from "../button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
-import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
-import { Anchor } from "../anchor/Anchor";
 import { downloadFile } from "../../utils/BaseUtils";
 import { ContactButton } from "../contactButton/ContactButtton";
 import SocialLinks from "../socialLinks/SocialLinks";
