@@ -2,4 +2,18 @@
 footer {
   grid-area: footer;
   background-color: $color-primary;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+
+  .logo-sm {
+    width: 4rem;
+    aspect-ratio: 1 / 1;
+  }
+
+  .cr-desc {
+    margin-top: 1rem;
+  }
 }

@@ -55,7 +55,7 @@ const skills: Skill[] = [
   {
     name: "SQL",
     icon: faSql,
-    color: "#2A2D38",
+    color: "#087DD7",
   },
 ];
 

@@ -7,6 +7,7 @@ import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { Anchor } from "../anchor/Anchor";
 import { downloadFile } from "../../utils/BaseUtils";
 import { ContactButton } from "../contactButton/ContactButtton";
+import SocialLinks from "../socialLinks/SocialLinks";
 
 const WelcomeSection = forwardRef<HTMLElement>((props, ref) => {
   return (
@@ -36,28 +37,7 @@ const WelcomeSection = forwardRef<HTMLElement>((props, ref) => {
             <ContactButton email="mateuszjacenty1@gmail.com" />
           </li>
         </ul>
-        <ul className="buttons-wrap">
-          <li>
-            <Anchor
-              variant="icon"
-              href="https://github.com/Huszan"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FontAwesomeIcon className="fa-icon" icon={faGithub} />
-            </Anchor>
-          </li>
-          <li>
-            <Anchor
-              variant="icon"
-              href="https://www.linkedin.com/in/mateusz-jacenty-895917186/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FontAwesomeIcon className="fa-icon" icon={faLinkedin} />
-            </Anchor>
-          </li>
-        </ul>
+        <SocialLinks />
       </div>
     </section>
   );
