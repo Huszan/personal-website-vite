@@ -20,7 +20,11 @@ export function Footer(props: FooterProps) {
 
   return (
     <footer ref={refFooter}>
-      <img className="logo-sm" src="/src/assets/mj_logo.png" alt="logo" />
+      <img
+        className="logo-sm"
+        src="/src/assets/images/mj_logo.png"
+        alt="logo"
+      />
       <SocialLinks />
       <div className="t-sub-2 cr-desc">
         © 2024 Designed and created by Mateusz Jacenty

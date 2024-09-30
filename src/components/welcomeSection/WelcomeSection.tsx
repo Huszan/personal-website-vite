@@ -12,7 +12,7 @@ const WelcomeSection = forwardRef<HTMLElement>((props, ref) => {
     <section ref={ref} className="welcome-section main-section">
       <img
         className="personal-image"
-        src="\src\assets\face3_bg.png"
+        src="/src/assets/images/face3_bg.png"
         alt="Personal photography"
       />
       <div className="about-me-wrapper">

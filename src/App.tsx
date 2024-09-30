@@ -13,7 +13,7 @@ function App() {
 
   return (
     <div id="app" className={`${isMobile ? "sd" : "md"}`}>
-      <ScrollMoveBackground bgSrc="/src/assets/bg_code.png" />
+      <ScrollMoveBackground bgSrc="/src/assets/images/bg_code.png" />
       <SideNav sectionsHook={sectionsHook} />
       <Content sectionsHook={sectionsHook} />
       <Footer sectionsHook={sectionsHook} />
