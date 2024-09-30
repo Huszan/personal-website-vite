@@ -4,6 +4,7 @@ import { SectionsHookData } from "../../hooks/UseSections";
 import WelcomeSection from "../welcomeSection/WelcomeSection";
 import QualificationsSection from "../qualificationsSection/QualificationsSection";
 import SkillsSection from "../techSection/SkillsSection";
+import ProjectsSection from "../projectsSection/ProjectsSection";
 
 export interface ContentProps {
   sectionsHook: SectionsHookData;
@@ -46,7 +47,7 @@ export function Content(props: ContentProps) {
       <WelcomeSection ref={refWelcome} />
       <QualificationsSection ref={refQualifications} />
       <SkillsSection ref={refSkills} />
-      <section className="main-section" ref={refProjects} />
+      <ProjectsSection ref={refProjects} />
     </div>
   );
 }

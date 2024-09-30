@@ -35,7 +35,7 @@ h1 {
 
 h2 {
   font-size: $h2-fs;
-  font-weight: 700;
+  font-weight: 900;
 }
 
 .md h2 {
@@ -44,7 +44,6 @@ h2 {
 
 h3 {
   font-size: $h3-fs;
-  font-weight: 500;
 }
 
 .md h3 {
@@ -75,8 +74,10 @@ h6 {
   font-size: $h5-fs;
 }
 
+h3,
 h4,
 h5,
 h6 {
-  font-weight: 400;
+  font-weight: 700;
+  margin-bottom: 0.25em;
 }

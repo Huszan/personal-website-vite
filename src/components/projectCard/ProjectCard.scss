@@ -1,0 +1,37 @@
+@import "/src/styles/variables";
+
+.project-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 100%;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-sizing: border-box;
+
+  background-color: $color-secondary;
+  filter: $base-drop-shadow-b;
+
+  .project-card--image {
+    height: 150px;
+    border-radius: 1rem 1rem 0 0;
+    width: calc(100% + 4rem);
+    transform: translateX(-2rem) translateY(-2rem);
+
+    background-position: center top;
+    background-size: cover;
+  }
+
+  .project-card--title {
+    margin-top: -1rem;
+  }
+
+  .project-card--desc {
+    margin-bottom: 1rem;
+  }
+
+  .view-anchor {
+    margin-top: auto;
+  }
+}
