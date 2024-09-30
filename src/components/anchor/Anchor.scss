@@ -4,18 +4,29 @@
   color: inherit;
   transition: all 0.1s ease-out;
 
-  &:not([disabled]) {
-    cursor: pointer;
+  &.disabled {
+    cursor: none;
+    pointer-events: none;
+    opacity: 0.4;
+  }
+
+  &.custom-button {
+    display: flex;
+    width: 100%;
+    gap: 3px;
+    box-sizing: border-box;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
 }
 
 .custom-anchor {
   &.text {
-    font-size: 1rem;
-    font-weight: 700;
+    font-weight: 600;
     text-decoration: none;
 
-    &:not([disabled]) {
+    &:not(.disabled) {
       &:hover {
         filter: $mini-drop-shadow;
         text-decoration: underline;
@@ -28,7 +39,7 @@
       height: $icon-size-m;
     }
 
-    &:not([disabled]) {
+    &:not(.disabled) {
       &:hover {
         filter: $mini-drop-shadow;
       }

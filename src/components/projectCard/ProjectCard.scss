@@ -31,7 +31,11 @@
     margin-bottom: 1rem;
   }
 
-  .view-anchor {
+  .anchor-wrapper {
     margin-top: auto;
+
+    .git-anchor {
+      margin-top: 5px;
+    }
   }
 }

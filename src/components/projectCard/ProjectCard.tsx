@@ -25,22 +25,28 @@ const ProjectCard = (props: ProjectCardProps) => {
       )}
       <h4 className="project-card--title">{project.title}</h4>
       <SeeMore className="project-card--desc t-sub-2">{project.desc}</SeeMore>
-      <Anchor
-        className={`view-anchor ${project.siteLink ? "" : " disabled"}`}
-        href={project.siteLink ? project.siteLink : ""}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <FontAwesomeIcon icon={faEye} /> View site
-      </Anchor>
-      <Anchor
-        className={project.gitLink ? "" : "disabled"}
-        href={project.gitLink ? project.gitLink : ""}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <FontAwesomeIcon icon={faGithub} /> Check out code
-      </Anchor>
+      <div className="anchor-wrapper">
+        <Anchor
+          className={`view-anchor custom-button solid ${
+            project.siteLink ? "" : " disabled"
+          }`}
+          href={project.siteLink ? project.siteLink : ""}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FontAwesomeIcon icon={faEye} /> View site
+        </Anchor>
+        <Anchor
+          className={`git-anchor custom-button clear ${
+            project.gitLink ? "" : " disabled"
+          }`}
+          href={project.gitLink ? project.gitLink : ""}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FontAwesomeIcon icon={faGithub} /> Check out code
+        </Anchor>
+      </div>
     </div>
   );
 };
