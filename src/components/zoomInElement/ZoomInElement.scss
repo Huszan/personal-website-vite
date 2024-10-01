@@ -1,0 +1,7 @@
+.zoom-in-element {
+  &:hover {
+    cursor: zoom-in;
+    transition: opacity 0.1s ease-in;
+    opacity: 0.8;
+  }
+}

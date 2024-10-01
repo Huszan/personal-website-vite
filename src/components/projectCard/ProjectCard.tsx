@@ -6,6 +6,7 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import SeeMore from "../seeMore/SeeMore";
 import { CSSProperties } from "react";
+import ZoomInElement from "../zoomInElement/ZoomInElement";
 
 interface ProjectCardProps {
   project: Project;
@@ -21,7 +22,11 @@ const ProjectCard = (props: ProjectCardProps) => {
   return (
     <div className="project-card">
       {project.imageSrc && (
-        <div className="project-card--image" style={imageStyle} />
+        <ZoomInElement
+          imgSrc={project.imageSrc}
+          className="project-card--image"
+          style={imageStyle}
+        />
       )}
       <h4 className="project-card--title">{project.title}</h4>
       <SeeMore className="project-card--desc t-sub-2">{project.desc}</SeeMore>

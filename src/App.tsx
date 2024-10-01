@@ -6,6 +6,7 @@ import { SideNav } from "./components/sideNav/SideNav";
 import { useSections } from "./hooks/UseSections";
 import { sectionsData } from "./data/SectionsData";
 import { ScrollMoveBackground } from "./components/scrollMoveBackground/ScrollMoveBackground";
+import ZoomInOverlay from "./components/zoomInOverlay/ZoomInOverlay";
 
 function App() {
   const isMobile = useMediaQuery("(max-width: 900px)");
@@ -14,6 +15,7 @@ function App() {
   return (
     <div id="app" className={`${isMobile ? "sd" : "md"}`}>
       <ScrollMoveBackground bgSrc="/src/assets/images/bg_code.png" />
+      <ZoomInOverlay />
       <SideNav sectionsHook={sectionsHook} />
       <Content sectionsHook={sectionsHook} />
       <Footer sectionsHook={sectionsHook} />
