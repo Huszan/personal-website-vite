@@ -20,7 +20,7 @@ const ProjectCard = (props: ProjectCardProps) => {
   };
 
   return (
-    <div className="project-card">
+    <div className="project-card carousel-element">
       {project.imageSrc && (
         <ZoomInElement
           imgSrc={project.imageSrc}

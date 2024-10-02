@@ -41,11 +41,16 @@ export function getChildrenHeight(element: HTMLElement) {
   return totalHeight;
 }
 
-export function convertRemToPx(x: number) {
+export function convertRemToPxNum(x: number) {
   const fontSize = parseFloat(
     getComputedStyle(document.documentElement).fontSize
   );
   return x * fontSize;
+}
+
+export function convertRemToPx(x: string) {
+  const val = convertRemToPxNum(Number(x.replace("rem", "")));
+  return `${val}px`;
 }
 
 export function isElementOverflown(element: HTMLElement) {

@@ -1,19 +1,18 @@
 #content {
   .projects-section {
     justify-content: center;
+    padding: 0;
 
     h1 {
-      margin-bottom: 6rem;
+      margin: 2rem;
     }
 
-    .project-card-list {
-      display: flex;
-      height: 100%;
-      flex-direction: row;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: stretch;
+    .carousel {
+      margin: auto 0;
     }
   }
+}
+
+.md #content .projects-section {
+  padding: 0;
 }
