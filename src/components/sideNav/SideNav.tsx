@@ -5,6 +5,7 @@ import { faCrosshairs } from "@fortawesome/free-solid-svg-icons";
 import { useContext } from "react";
 import { ButtonToggle } from "../buttonToggle/ButtonToggle";
 import { GlobalContext } from "../../context/GlobalContextComponent";
+import { useTimeActivator } from "../../hooks/UseTimeActivator";
 
 export interface SideNavProps {
   sectionsHook: SectionsHookData;
@@ -17,9 +18,10 @@ export function SideNav(props: SideNavProps) {
     config.setCenterOnSection,
   ];
   const { sectionsHook } = props;
+  const { isActive } = useTimeActivator({ intervalMS: 1000, event: "scroll" });
 
   return (
-    <div className="side-nav-wrapper">
+    <div className={`${"side-nav-wrapper"}${isActive ? "" : " hidden"}`}>
       <nav>
         <SectionBubbles sectionsHook={sectionsHook} plane={"horizontal"} />
         <div className="options-box">

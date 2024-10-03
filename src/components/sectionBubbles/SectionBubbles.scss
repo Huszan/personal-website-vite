@@ -1,7 +1,7 @@
 $selector-size: 30px;
 $selector-thickness: 2px;
 $selector-color: white;
-$selector-icon-size: 12px;
+$selector-icon-size: 1rem;
 $selector-separator-size: 2rem;
 $progress-pointer-size: 7px;
 
@@ -47,11 +47,11 @@ $progress-pointer-size: 7px;
   .section-selector {
     display: block;
     position: relative;
-    height: $selector-size;
+    height: $selector-icon-size;
     aspect-ratio: 1/1;
+    padding: calc(4px + $selector-thickness / 2);
     border: $selector-thickness $selector-color solid;
     border-radius: 100%;
-    box-sizing: border-box;
 
     transition: background-color ease-out 0.1s;
 
