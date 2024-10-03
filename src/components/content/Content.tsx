@@ -3,7 +3,7 @@ import { MutableRefObject, useEffect, useRef } from "react";
 import { SectionsHookData } from "../../hooks/UseSections";
 import WelcomeSection from "../welcomeSection/WelcomeSection";
 import QualificationsSection from "../qualificationsSection/QualificationsSection";
-import SkillsSection from "../techSection/SkillsSection";
+import SkillsSection from "../skillsSection/SkillsSection";
 import ProjectsSection from "../projectsSection/ProjectsSection";
 
 export interface ContentProps {

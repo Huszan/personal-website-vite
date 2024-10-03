@@ -19,7 +19,7 @@ const SkillsSection = forwardRef<HTMLElement>((props, ref) => {
   return (
     <section className="main-section skills-section" ref={ref}>
       <h1 className="center">Skills</h1>
-      <span className="sub">
+      <span className="sub main-section--desc">
         Some technologies i've been working with recently.
         <br />
         I'm also totally into learning new stuff!

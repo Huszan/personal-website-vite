@@ -16,11 +16,11 @@ const WelcomeSection = forwardRef<HTMLElement>((props, ref) => {
         alt="Personal photography"
       />
       <div className="about-me-wrapper">
-        <h5 className="t-sub">Hi there! I'm</h5>
+        <h6 className="t-sub">Hi there! I'm</h6>
         <h1>
           Mateusz <span className="t-acc">Jacenty</span>
         </h1>
-        <span>
+        <span className="t-sub">
           <b>Front-end Developer</b> from Poland, passionate about creating{" "}
           <b>intuitive</b> and <b>responsive</b> web experiences.
         </span>
