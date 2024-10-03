@@ -19,11 +19,22 @@
   &.clear {
     transition: all 0.1s ease-out;
     border: 1px solid white;
+
+    &:disabled,
+    &.disabled {
+      border-color: #ffffff90;
+      color: #ffffff90;
+    }
   }
 
   &.solid {
     transition: all 0.1s ease-out;
     background-color: $color-accent;
     color: $color-accent-font;
+
+    &:disabled,
+    &.disabled {
+      background-color: #ffffff90;
+    }
   }
 }
