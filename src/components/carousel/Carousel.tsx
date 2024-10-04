@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import "./Carousel.scss";
 import { calcElementsPerPage } from "../../utils/CarouselUtils";
+import useSwipe from "../../hooks/UseSwipe";
 
 interface CarouselProps extends React.HTMLAttributes<HTMLElement> {
   targetWidth?: number; // In px
@@ -10,6 +11,7 @@ interface CarouselProps extends React.HTMLAttributes<HTMLElement> {
 const Carousel = (props: CarouselProps) => {
   const { targetWidth = 300, buttonWidth = 3, children } = props;
   const carouselRef = useRef<HTMLDivElement | null>(null);
+  const lastSwipeDir = useSwipe({ ref: carouselRef });
   const elementsWrapperRef = useRef<HTMLDivElement | null>(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [elementsPerPage, setElementsPerPage] = useState(
@@ -37,14 +39,17 @@ const Carousel = (props: CarouselProps) => {
     );
   }, [carouselRef, buttonWidth]);
 
-  const clamp = (val: number) => {
-    if (!elementsWrapperRef.current) return 0;
-    const [min, max] = [
-      0,
-      elementsWrapperRef.current.children.length - elementsPerPage,
-    ];
-    return Math.max(min, Math.min(max, val));
-  };
+  const clamp = useCallback(
+    (val: number) => {
+      if (!elementsWrapperRef.current) return 0;
+      const [min, max] = [
+        0,
+        elementsWrapperRef.current.children.length - elementsPerPage,
+      ];
+      return Math.max(min, Math.min(max, val));
+    },
+    [elementsPerPage]
+  );
 
   const isLast = () => {
     if (!elementsWrapperRef.current) return;
@@ -58,13 +63,18 @@ const Carousel = (props: CarouselProps) => {
     return currentPage === 0;
   };
 
-  const goNext = () => {
+  const goNext = useCallback(() => {
     setCurrentPage((prev) => clamp(prev + elementsPerPage));
-  };
+  }, [clamp, elementsPerPage]);
 
-  const goPrev = () => {
+  const goPrev = useCallback(() => {
     setCurrentPage((prev) => clamp(prev - elementsPerPage));
-  };
+  }, [clamp, elementsPerPage]);
+
+  useEffect(() => {
+    if (lastSwipeDir === "right") goPrev();
+    if (lastSwipeDir === "left") goNext();
+  }, [goNext, goPrev, lastSwipeDir]);
 
   return (
     <div className="carousel" ref={carouselRef}>
