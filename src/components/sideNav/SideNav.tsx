@@ -1,7 +1,11 @@
 import "./SideNav.scss";
 import { SectionBubbles } from "../sectionBubbles/SectionBubbles";
 import { SectionsHookData } from "../../hooks/UseSections";
-import { faCrosshairs, faLock } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCrosshairs,
+  faLock,
+  faLockOpen,
+} from "@fortawesome/free-solid-svg-icons";
 import { useContext, useMemo } from "react";
 import { ButtonToggle } from "../buttonToggle/ButtonToggle";
 import { GlobalContext } from "../../context/GlobalContextComponent";
@@ -52,12 +56,13 @@ export function SideNav(props: SideNavProps) {
         <SectionBubbles sectionsHook={sectionsHook} plane={"horizontal"} />
         <div className="options-box">
           <ButtonToggle
-            icon={faCrosshairs}
+            iconEnabled={faCrosshairs}
             state={isAutoAlign}
             setState={setIsAutoAlign}
           />
           <ButtonToggle
-            icon={faLock}
+            iconEnabled={faLock}
+            iconDisabled={faLockOpen}
             state={config.isSideBarLocked}
             setState={config.setIsSideBarLocked}
           />
