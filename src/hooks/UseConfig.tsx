@@ -3,14 +3,23 @@ import useStorage from "./UseStorage";
 export interface ConfigData {
   centerOnSection: boolean;
   setCenterOnSection: React.Dispatch<React.SetStateAction<boolean>>;
+  isSideBarLocked: boolean;
+  setIsSideBarLocked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const useConfig = () => {
-  const centerOnSection = useStorage<boolean>({ key: "conf_cos", val: false });
+  const { get: centerOnSection, set: setCenterOnSection } = useStorage<boolean>(
+    { key: "conf_cos", val: false }
+  );
+  const { get: isSideBarLocked, set: setIsSideBarLocked } = useStorage<boolean>(
+    { key: "conf_isbl", val: true }
+  );
 
   return {
-    centerOnSection: centerOnSection.get,
-    setCenterOnSection: centerOnSection.set,
+    centerOnSection,
+    setCenterOnSection,
+    isSideBarLocked,
+    setIsSideBarLocked,
   } as ConfigData;
 };
 
