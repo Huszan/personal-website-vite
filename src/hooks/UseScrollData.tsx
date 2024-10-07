@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { throttle } from "../utils/BaseUtils";
 
 export interface ScrollPosition {
   x: number;
@@ -58,11 +59,12 @@ export function useScrollData() {
       lastScrollTop.current = currentScrollTop;
       lastScrollLeft.current = currentScrollLeft;
     };
+    const throttledHandleScroll = throttle(handleScroll, 100);
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", throttledHandleScroll);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", throttledHandleScroll);
     };
   }, []);
 

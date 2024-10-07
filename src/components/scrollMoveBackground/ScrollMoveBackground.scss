@@ -10,6 +10,15 @@
   position: sticky;
   width: 100%;
   height: 100vh;
+  overflow: hidden;
   top: 0;
   left: 0;
+
+  .sm-bg--content {
+    height: 100%;
+    width: 100%;
+    background-position: bottom;
+    background-size: 200vh;
+    transition: transform 0.12s ease-out;
+  }
 }

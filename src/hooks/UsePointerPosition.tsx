@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { throttle } from "../utils/BaseUtils";
 
 export interface PointerPositionData {
   x: number;
@@ -17,11 +18,12 @@ const usePointerPosition = () => {
       y: e.clientY,
     });
   }, []);
+  const throttledOnMouseMove = throttle(onMouseMove, 100);
 
   useEffect(() => {
-    window.addEventListener("mousemove", onMouseMove);
-    return () => window.removeEventListener("mousemove", onMouseMove);
-  }, [onMouseMove]);
+    window.addEventListener("mousemove", throttledOnMouseMove);
+    return () => window.removeEventListener("mousemove", throttledOnMouseMove);
+  }, [throttledOnMouseMove]);
 
   return { x: position.x, y: position.y } as PointerPositionData;
 };

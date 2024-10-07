@@ -39,6 +39,7 @@ $progress-pointer-size: 7px;
       height: $progress-pointer-size;
       background-color: white;
       border-radius: 100%;
+      transition: top 0.12s ease-out;
 
       filter: drop-shadow(white 0 0 calc($progress-pointer-size / 5));
     }

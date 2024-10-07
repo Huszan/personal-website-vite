@@ -89,3 +89,28 @@ export function isElementOverflown(element: HTMLElement) {
     element.scrollWidth > element.clientWidth
   );
 }
+
+export function throttle<T extends (...args: any[]) => void>(
+  func: T,
+  delay: number
+): T {
+  let lastCall = 0;
+  let timeout: ReturnType<typeof setTimeout> | null = null;
+
+  return function (...args: Parameters<T>): void {
+    const now = new Date().getTime();
+
+    // If enough time has passed, invoke the function
+    if (now - lastCall >= delay) {
+      lastCall = now;
+      func(...args);
+    } else {
+      // Clear any previous scheduled call and schedule a new one
+      if (timeout) clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        lastCall = new Date().getTime();
+        func(...args);
+      }, delay - (now - lastCall)); // Schedule to execute after the remaining time
+    }
+  } as T;
+}

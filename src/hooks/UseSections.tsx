@@ -1,6 +1,6 @@
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
-import { scrollToElement } from "../utils/BaseUtils";
+import { scrollToElement, throttle } from "../utils/BaseUtils";
 import { getMostVisibleSection } from "../utils/SectionUtils";
 import { useGlobalContext } from "./UseGlobalContext";
 
@@ -89,9 +89,12 @@ export function useSections(initialSections: SectionRecords = {}) {
 
   useEffect(() => {
     if (!areSectionsInitialized) return;
+    const throttledUpdate = throttle(() => {
+      const mostVisibleKey = getMostVisibleSection(sections);
+      setActiveSectionKey(mostVisibleKey);
+    }, 500);
 
-    const mostVisibleKey = getMostVisibleSection(sections);
-    setActiveSectionKey(mostVisibleKey);
+    throttledUpdate();
   }, [lastScroll.position, sections, areSectionsInitialized]);
 
   useEffect(() => {
