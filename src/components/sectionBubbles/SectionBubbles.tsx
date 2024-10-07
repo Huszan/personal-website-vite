@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./SectionBubbles.scss";
 import { SectionsHookData } from "../../hooks/UseSections";
-import { scrollToElement } from "../../utils/BaseUtils";
+import { scrollToElementTop } from "../../utils/BaseUtils";
 
 export interface SectionBubblesProps {
   sectionsHook: SectionsHookData;
@@ -17,9 +17,7 @@ export function SectionBubbles(props: SectionBubblesProps) {
     ([key, section]) => {
       const isActive = sectionsHook.activeSectionKey === key;
 
-      const selectElement = () => {
-        if (section.element) scrollToElement(section.element);
-      };
+      const selectElement = () => scrollToElementTop(section.element);
 
       return (
         <li

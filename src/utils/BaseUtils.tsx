@@ -1,6 +1,36 @@
 export function scrollToElement(element: HTMLElement | undefined) {
-  if (!element) return;
-  element.scrollIntoView({ behavior: "smooth" });
+  if (element === undefined) return;
+  const elementRect = element.getBoundingClientRect();
+  const viewportHeight =
+    window.innerHeight || document.documentElement.clientHeight;
+  const bounds = Math.min(viewportHeight - elementRect.height, 0);
+
+  if (bounds > elementRect.top) {
+    scrollToElementBot(element);
+  } else if (elementRect.top > 0) {
+    scrollToElementTop(element);
+  }
+}
+
+export function scrollToElementTop(element: HTMLElement | undefined) {
+  if (element === undefined) return;
+  const elementRect = element.getBoundingClientRect();
+  window.scrollTo({
+    top: window.scrollY + elementRect.top,
+    behavior: "smooth",
+  });
+}
+
+export function scrollToElementBot(element: HTMLElement | undefined) {
+  if (element === undefined) return;
+  const elementRect = element.getBoundingClientRect();
+  const viewportHeight =
+    window.innerHeight || document.documentElement.clientHeight;
+  const bounds = Math.min(viewportHeight - elementRect.height, 0);
+  window.scrollTo({
+    top: window.scrollY - bounds + elementRect.top,
+    behavior: "smooth",
+  });
 }
 
 export function getElementVisiblePercentage(element: HTMLElement): number {

@@ -106,7 +106,12 @@ export function useSections(initialSections: SectionRecords = {}) {
     return () => {
       clearTimeout(timeout);
     };
-  }, [activeSectionKey, sections, config.centerOnSection]);
+  }, [
+    activeSectionKey,
+    sections,
+    config.centerOnSection,
+    lastScroll.direction,
+  ]);
 
   const sectionsData: SectionsHookData = {
     get: sections,
