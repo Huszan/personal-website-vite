@@ -1,6 +1,5 @@
 import "./ScrollMoveBackground.scss";
 import { useGlobalContext } from "../../hooks/UseGlobalContext";
-import { useEffect } from "react";
 
 interface ScrollMoveBackgroundProps {
   bgSrc: string;

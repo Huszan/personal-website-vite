@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { throttle } from "../utils/BaseUtils";
 
 export interface PointerPositionData {
@@ -7,7 +7,7 @@ export interface PointerPositionData {
 }
 
 const usePointerPosition = () => {
-  const [position, setPosition] = useState<{ x: number; y: number }>({
+  const [position, setPosition] = useState<PointerPositionData>({
     x: 0,
     y: 0,
   });
@@ -18,14 +18,17 @@ const usePointerPosition = () => {
       y: e.clientY,
     });
   }, []);
-  const throttledOnMouseMove = throttle(onMouseMove, 100);
+  const throttledOnMouseMove = useMemo(
+    () => throttle(onMouseMove, 1000 / 30),
+    [onMouseMove]
+  );
 
   useEffect(() => {
     window.addEventListener("mousemove", throttledOnMouseMove);
     return () => window.removeEventListener("mousemove", throttledOnMouseMove);
   }, [throttledOnMouseMove]);
 
-  return { x: position.x, y: position.y } as PointerPositionData;
+  return position;
 };
 
 export { usePointerPosition };

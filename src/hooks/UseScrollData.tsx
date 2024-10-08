@@ -59,7 +59,7 @@ export function useScrollData() {
       lastScrollTop.current = currentScrollTop;
       lastScrollLeft.current = currentScrollLeft;
     };
-    const throttledHandleScroll = throttle(handleScroll, 100);
+    const throttledHandleScroll = throttle(handleScroll, 1000 / 30);
 
     window.addEventListener("scroll", throttledHandleScroll);
 
