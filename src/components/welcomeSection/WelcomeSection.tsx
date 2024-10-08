@@ -24,17 +24,13 @@ const WelcomeSection = forwardRef<HTMLElement>((props, ref) => {
           <b>Front-end Developer</b> from Poland, passionate about creating{" "}
           <b>intuitive</b> and <b>responsive</b> web experiences.
         </span>
-        <ul className="buttons-wrap">
-          <li>
-            <Button variant="solid" onClick={() => downloadFile("d_cv")}>
-              <FontAwesomeIcon className="fa-icon" icon={faDownload} /> Download
-              CV
-            </Button>
-          </li>
-          <li>
-            <ContactButton email="mateuszjacenty1@gmail.com" />
-          </li>
-        </ul>
+        <div className="buttons-wrap">
+          <Button variant="solid" onClick={() => downloadFile("d_cv")}>
+            <FontAwesomeIcon className="fa-icon" icon={faDownload} /> Download
+            CV
+          </Button>
+          <ContactButton email="mateuszjacenty1@gmail.com" />
+        </div>
         <SocialLinks />
       </div>
     </section>

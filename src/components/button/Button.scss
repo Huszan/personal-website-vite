@@ -2,16 +2,17 @@
 
 .custom-button {
   display: inline;
-  padding: 0.8rem 3rem;
-  width: 150px;
+  padding: 0.8rem 1rem;
+  width: 100%;
 
   box-sizing: content-box;
   border-radius: 4px;
 
   font-weight: 600;
 
-  .fa-icon {
+  svg {
     display: inline;
+    margin: 0 0.2rem;
   }
 }
 
@@ -36,5 +37,11 @@
     &.disabled {
       background-color: #ffffff90;
     }
+  }
+}
+
+.md {
+  .custom-button {
+    max-width: 350px;
   }
 }

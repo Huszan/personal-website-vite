@@ -5,7 +5,9 @@
   right: 0;
   top: 0;
   height: 100%;
+  z-index: 1;
   pointer-events: none;
+  grid-area: sidenav;
 
   nav {
     position: sticky;
@@ -14,7 +16,11 @@
     height: 100dvh;
     padding: 12px;
     box-sizing: border-box;
-    background: linear-gradient(90deg, transparent 0%, #00000060 80%);
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba($color-primary-dark, 0.8) 80%
+    );
 
     display: flex;
     align-items: center;
@@ -46,5 +52,19 @@
 
   &.hidden {
     transform: translateX(100%);
+  }
+}
+
+.lock-side {
+  .side-nav-wrapper {
+    position: static;
+
+    nav {
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba($color-primary-dark, 0.8) 0%
+      );
+    }
   }
 }

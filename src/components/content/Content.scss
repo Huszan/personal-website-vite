@@ -3,6 +3,7 @@
 #content {
   min-height: 100vh;
   grid-area: content;
+  overflow: auto;
 
   .main-section {
     min-height: 100vh;

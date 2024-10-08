@@ -7,4 +7,12 @@
     "footer";
   grid-template-rows: auto 150px;
   grid-template-columns: 100%;
+
+  &.lock-side {
+    grid-template-areas:
+      "content sidenav"
+      "footer sidenav";
+    grid-template-rows: auto 150px;
+    grid-template-columns: 1fr min-content;
+  }
 }
