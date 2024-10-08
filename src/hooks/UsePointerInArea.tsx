@@ -22,6 +22,11 @@ const usePointerInArea = (props: PointerInAreaProps) => {
   const [isInArea, setIsInArea] = useState(false);
 
   useEffect(() => {
+    const isPointerAvailable = window.matchMedia("(pointer: fine)").matches;
+    if (!isPointerAvailable) {
+      setIsInArea(false);
+      return;
+    }
     const { x, y } = pointerPosition;
     const current =
       xLim.min <= x && x <= xLim.max && yLim.min <= y && y <= yLim.max;

@@ -5,10 +5,6 @@ button {
   padding-inline: 0;
   color: inherit;
 
-  &:hover {
-    filter: $mini-drop-shadow;
-  }
-
   &:not([disabled]) {
     cursor: pointer;
   }

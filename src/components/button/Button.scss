@@ -10,6 +10,10 @@
 
   font-weight: 600;
 
+  &:hover {
+    filter: $mini-drop-shadow;
+  }
+
   svg {
     display: inline;
     margin: 0 0.2rem;
