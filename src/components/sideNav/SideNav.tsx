@@ -13,6 +13,7 @@ import { ButtonToggle } from "../buttonToggle/ButtonToggle";
 import { GlobalContext } from "../../context/GlobalContextComponent";
 import { useTimeActivator } from "../../hooks/UseTimeActivator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSidebarRoll } from "../../assets/icons/fa-sidebar-roll";
 
 export interface SideNavProps {
   sectionsHook: SectionsHookData;
@@ -36,8 +37,17 @@ export function SideNav(props: SideNavProps) {
   };
 
   const isVisible = useMemo(() => {
-    return isExpanded || config.isSideBarLocked || scrollActivator.isActive;
-  }, [isExpanded, config.isSideBarLocked, scrollActivator.isActive]);
+    return (
+      isExpanded ||
+      config.isSideBarLocked ||
+      (config.isAutoOpenSidebarOnScroll && scrollActivator.isActive)
+    );
+  }, [
+    isExpanded,
+    config.isSideBarLocked,
+    config.isAutoOpenSidebarOnScroll,
+    scrollActivator.isActive,
+  ]);
 
   return (
     <div className={`${"side-nav-wrapper"}${isVisible ? "" : " hidden"}`}>
@@ -50,6 +60,13 @@ export function SideNav(props: SideNavProps) {
         )}
         <SectionBubbles sectionsHook={sectionsHook} plane={"horizontal"} />
         <div className="options-box">
+          {!config.isSideBarLocked && (
+            <ButtonToggle
+              iconEnabled={faSidebarRoll}
+              state={config.isAutoOpenSidebarOnScroll}
+              setState={config.setIsAutoOpenSidebarOnScroll}
+            />
+          )}
           <ButtonToggle
             iconEnabled={faCrosshairs}
             state={isAutoAlign}

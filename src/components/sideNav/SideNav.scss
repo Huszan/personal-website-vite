@@ -9,6 +9,8 @@ $border-size: 0rem;
   height: 100%;
   z-index: 100;
   grid-area: sidenav;
+  background-color: $color-primary-dark;
+  border-left: $border-size white solid;
   filter: $mini-drop-shadow-b;
 
   nav {
@@ -17,12 +19,12 @@ $border-size: 0rem;
     height: 100dvh;
     padding: 12px;
     box-sizing: border-box;
-    background-color: $color-primary-dark;
-    border-left: $border-size white solid;
 
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 0.2rem;
 
     .toggle-visibility {
       position: absolute;
@@ -73,6 +75,18 @@ $border-size: 0rem;
 
     nav {
       background-color: $color-primary-dark;
+    }
+  }
+}
+
+@media screen and (max-height: 500px) {
+  .side-nav-wrapper {
+    nav {
+      flex-direction: row;
+
+      .options-box {
+        position: static;
+      }
     }
   }
 }
