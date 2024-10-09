@@ -9,11 +9,23 @@ import { ScrollMoveBackground } from "./components/scrollMoveBackground/ScrollMo
 import ZoomInOverlay from "./components/zoomInOverlay/ZoomInOverlay";
 import { useGlobalContext } from "./hooks/UseGlobalContext";
 import BgCodePNG from "./assets/images/bg_code.png";
+import useElementObserver from "./hooks/UseElementObserver";
 
 function App() {
   const isMobile = useMediaQuery("(max-width: 900px)");
   const sectionsHook = useSections(sectionsData);
   const { config } = useGlobalContext();
+
+  useElementObserver(
+    (target, isIntersecting) => {
+      if (!isIntersecting) target.setAttribute("tabindex", "-1");
+      else target.removeAttribute("tabindex");
+    },
+    {
+      selection: "button, a",
+      intersectionOptions: { threshold: 1 },
+    }
+  );
 
   return (
     <div
