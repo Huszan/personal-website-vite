@@ -8,6 +8,7 @@ import { sectionsData } from "./data/SectionsData";
 import { ScrollMoveBackground } from "./components/scrollMoveBackground/ScrollMoveBackground";
 import ZoomInOverlay from "./components/zoomInOverlay/ZoomInOverlay";
 import { useGlobalContext } from "./hooks/UseGlobalContext";
+import BgCodePNG from "./assets/images/bg_code.png";
 
 function App() {
   const isMobile = useMediaQuery("(max-width: 900px)");
@@ -21,7 +22,7 @@ function App() {
         config.isSideBarLocked ? " lock-side" : ""
       }`}
     >
-      <ScrollMoveBackground bgSrc="/src/assets/images/bg_code.png" />
+      <ScrollMoveBackground bgSrc={BgCodePNG} />
       <ZoomInOverlay />
       <SideNav sectionsHook={sectionsHook} />
       <Content sectionsHook={sectionsHook} />

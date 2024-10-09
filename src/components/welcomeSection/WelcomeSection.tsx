@@ -6,13 +6,14 @@ import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { downloadFile } from "../../utils/BaseUtils";
 import { ContactButton } from "../contactButton/ContactButtton";
 import SocialLinks from "../socialLinks/SocialLinks";
+import FacePNG from "../../assets/images/face3_bg.png";
 
 const WelcomeSection = forwardRef<HTMLElement>((_props, ref) => {
   return (
     <section ref={ref} className="welcome-section main-section">
       <img
         className="personal-image"
-        src="/src/assets/images/face3_bg.png"
+        src={FacePNG}
         alt="Personal photography"
       />
       <div className="about-me-wrapper">
