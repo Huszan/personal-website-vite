@@ -3,7 +3,7 @@ import "./SkillsSection.scss";
 import { skills } from "../../data/SkillsData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const SkillsSection = forwardRef<HTMLElement>((props, ref) => {
+const SkillsSection = forwardRef<HTMLElement>((_props, ref) => {
   const skillElements = skills.map((el) => {
     const style: React.CSSProperties = {
       backgroundColor: el.color,

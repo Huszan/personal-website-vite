@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMedal, faUniversity } from "@fortawesome/free-solid-svg-icons";
 import SeeMore from "../seeMore/SeeMore";
 
-const QualificationsSection = forwardRef<HTMLElement>((props, ref) => {
+const QualificationsSection = forwardRef<HTMLElement>((_props, ref) => {
   return (
     <section className="main-section qual-section" ref={ref}>
       <h1 className="center">Qualifications</h1>

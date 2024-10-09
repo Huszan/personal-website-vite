@@ -7,7 +7,7 @@ import { downloadFile } from "../../utils/BaseUtils";
 import { ContactButton } from "../contactButton/ContactButtton";
 import SocialLinks from "../socialLinks/SocialLinks";
 
-const WelcomeSection = forwardRef<HTMLElement>((props, ref) => {
+const WelcomeSection = forwardRef<HTMLElement>((_props, ref) => {
   return (
     <section ref={ref} className="welcome-section main-section">
       <img
